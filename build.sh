@@ -11,5 +11,5 @@ fi
 find /build -name build.sh -print0 | head -n 1 | while read -d $'\0' fname; do
   echo "### executing ${fname}"
   cd $(dirname "${fname}")
-  eval ${fname}
+  eval ${fname} "$@"
 done
