@@ -13,4 +13,4 @@ RUN apk -v --update add \
 VOLUME /root/.aws
 VOLUME /build
 WORKDIR /build
-ENTRYPOINT ["aws"]
+#ENTRYPOINT ["aws"]
