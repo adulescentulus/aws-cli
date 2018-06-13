@@ -1,16 +1,32 @@
 FROM alpine:3.6
 RUN apk -v --update add \
-	bash \
-        python \
-        py-pip \
+        bash \
+        git \
         groff \
-        less \
+        jq \
         mailcap \
+        less \
+        py-pip \
+        python \
         && \
-    pip install --upgrade awscli==1.11.188 s3cmd==2.0.1 python-magic awscli-local && \
-    apk -v --purge del py-pip && \
+    pip install --upgrade pip && \
+    pip install certifi && \
+    pip install --upgrade awscli==1.11.188 \
+        awscli-local \
+        jinja2 \
+        python-magic \
+        s3cmd==2.0.1 \
+        troposphere && \
+    apk -v --purge del \
+        py-pip && \
     rm /var/cache/apk/*
+RUN mkdir -p /opt && \
+    cd /opt && \
+    git clone https://github.com/awslabs/aws-iam-generator.git
 VOLUME /root/.aws
 VOLUME /build
 WORKDIR /build
-#ENTRYPOINT ["aws"]
+
+ENV AWS_DEFAULT_REGION=eu-central-1
+
+CMD bash
