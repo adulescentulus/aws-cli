@@ -23,9 +23,11 @@ RUN tar xzf /usr/local/hugo/${HUGO_BINARY}.tar.gz -C /usr/local/hugo/ \
     && rm /usr/local/hugo/${HUGO_BINARY}.tar.gz
 
 COPY build.sh /
-RUN chmod +x /build.sh
+COPY docker-entrypoint.sh /
+RUN chmod +x /*.sh
 
 VOLUME /root/.aws
 VOLUME /build
 WORKDIR /build
-ENTRYPOINT ["/build.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/build.sh"]
