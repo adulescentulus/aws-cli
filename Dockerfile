@@ -13,7 +13,7 @@ RUN apk -v --update add \
     rm /var/cache/apk/*
 
 # Download and Install hugo
-ENV HUGO_VERSION 0.31.1
+ENV HUGO_VERSION 0.53
 ENV HUGO_BINARY hugo_${HUGO_VERSION}_linux-64bit
 
 RUN mkdir /usr/local/hugo
